@@ -6,63 +6,91 @@
 
 ```
 openclaw-skills/
-├── multi_agent_dev.py      # 多Agent协同开发脚本
-├── multi-agent-planner/    # 计划阶段Skill
-├── multi-agent-executor/   # 执行阶段Skill
-├── multi-agent-reviewer/   # 审查阶段Skill
-└── multi-agent-coordinator/ # 核心调度器Skill
+├── README.md                        # 项目说明
+├── scripts/                         # 脚本目录
+│   ├── analyze/                   # 需求分析脚本
+│   │   └── main.py              # 产品经理 + 架构师
+│   ├── execute/                  # 代码执行脚本
+│   │   └── main.py              # 软件工程师 + 交互设计师
+│   ├── review/                   # 代码审查脚本
+│   │   └── main.py              # 测试工程师 + 软件工程师
+│   └── coordinator/               # 协调器脚本
+│       └── main.py              # 完整流程
+├── multi-agent-planner/          # Skill: 计划阶段
+├── multi-agent-executor/         # Skill: 执行阶段
+├── multi-agent-reviewer/         # Skill: 审查阶段
+├── multi-agent-coordinator/     # Skill: 调度器
+└── references/                  # 参考资料
+    ├── agent_roles.md           # Agent角色定义
+    ├── cli_templates.md        # 命令行模板
+    ├── prompt_templates.md    # 提示词模板
+    └── workflows.md           # 工作流图
 ```
 
-## Skills说明
+## 快速开始
 
-### 1. multi-agent-planner (计划阶段)
-- 📋 product-manager: 需求分析
-- 👨‍💻 architect: 架构设计
-
-### 2. multi-agent-executor (执行阶段)
-- 🧑‍💻 software-engineer: 代码实现
-- 🎨 ui-designer: 界面设计
-
-### 3. multi-agent-reviewer (审查阶段)
-- 🧪 tester: 测试用例
-- 🧑‍💻 software-engineer: 代码审查
-
-### 4. multi-agent-coordinator (核心调度器)
-协调完整开发流程
-
-## 使用方式
-
+### 1. 克隆项目
 ```bash
-# 需求分析
-python3 scripts/multi_agent_dev.py --project <项目名> analyze --requirement "<需求>"
-
-# 架构设计
-python3 scripts/multi_agent_dev.py --project <项目名> architect --task "<任务>"
-
-# 代码实现
-python3 scripts/multi_agent_dev.py --project <项目名> code --task "<任务>"
-
-# 测试用例
-python3 scripts/multi_agent_dev.py --project <项目名> test --task "<任务>"
-
-# UI设计
-python3 scripts/multi_agent_dev.py --project <项目名> design --task "<任务>"
-
-# 完整工作流
-python3 scripts/multi_agent_dev.py --project <项目名> run --requirement "<需求>"
+git clone https://github.com/YearsAlso/openclaw-skills.git
+cd openclaw-skills
 ```
 
-## 配置Agent
-
-需要先配置以下Agent：
-
+### 2. 配置Agent
 ```bash
+# 添加需要的Agent
 openclaw agents add product-manager --workspace ~/.openclaw/agents/product-manager/agent
 openclaw agents add architect --workspace ~/.openclaw/agents/architect/agent
 openclaw agents add software-engineer --workspace ~/.openclaw/agents/software-engineer/agent
 openclaw agents add tester --workspace ~/.openclaw/agents/tester/agent
 openclaw agents add ui-designer --workspace ~/.openclaw/agents/ui-designer/agent
 ```
+
+## 使用方式
+
+### 需求分析（产品经理 + 架构师）
+```bash
+python3 scripts/analyze/main.py --project myapp --requirement "实现用户登录功能"
+```
+
+### 代码执行（软件工程师 + 交互设计师）
+```bash
+python3 scripts/execute/main.py --project myapp --task "实现登录API"
+```
+
+### 代码审查（测试工程师 + 软件工程师）
+```bash
+python3 scripts/review/main.py --project myapp --task "审查登录模块"
+```
+
+### 完整流程（协调器）
+```bash
+python3 scripts/coordinator/main.py --project myapp --requirement "实现用户系统"
+```
+
+### 可选参数
+```bash
+# 跳过UI设计
+python3 scripts/coordinator/main.py --project myapp --requirement "xxx" --skip-ui
+
+# 跳过测试
+python3 scripts/coordinator/main.py --project myapp --requirement "xxx" --skip-test
+```
+
+## Agent角色
+
+| Agent | 职责 |
+|-------|------|
+| product-manager | 需求分析、产品设计 |
+| architect | 架构设计、技术选型 |
+| software-engineer | 代码实现、代码审查 |
+| tester | 测试用例、质量保证 |
+| ui-designer | 界面设计、交互流程 |
+
+## 参考资料
+
+- `references/agent_roles.md` - Agent角色定义
+- `references/prompt_templates.md` - 提示词模板
+- `references/workflows.md` - 工作流图
 
 ## 许可证
 
