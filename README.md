@@ -34,22 +34,22 @@ openclaw-skills/
 
 ```bash
 # 需求分析
-python3 multi_agent_dev.py --project <项目名> analyze --requirement "<需求>"
+python3 scripts/multi_agent_dev.py --project <项目名> analyze --requirement "<需求>"
 
 # 架构设计
-python3 multi_agent_dev.py --project <项目名> architect --task "<任务>"
+python3 scripts/multi_agent_dev.py --project <项目名> architect --task "<任务>"
 
 # 代码实现
-python3 multi_agent_dev.py --project <项目名> code --task "<任务>"
+python3 scripts/multi_agent_dev.py --project <项目名> code --task "<任务>"
 
 # 测试用例
-python3 multi_agent_dev.py --project <项目名> test --task "<任务>"
+python3 scripts/multi_agent_dev.py --project <项目名> test --task "<任务>"
 
 # UI设计
-python3 multi_agent_dev.py --project <项目名> design --task "<任务>"
+python3 scripts/multi_agent_dev.py --project <项目名> design --task "<任务>"
 
 # 完整工作流
-python3 multi_agent_dev.py --project <项目名> run --requirement "<需求>"
+python3 scripts/multi_agent_dev.py --project <项目名> run --requirement "<需求>"
 ```
 
 ## 配置Agent
